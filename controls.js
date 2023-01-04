@@ -1,6 +1,6 @@
 class Controls{
     constructor(){
-        this.forword=false;
+        this.forward=false;
         this.left=false;
         this.right=false;
         this.reverse=false;
@@ -24,7 +24,6 @@ class Controls{
                     this.reverse=true;
                     break;
             }
-            // console.table(this);
         }
         document.onkeyup=(event)=>{
             switch(event.key){
@@ -41,7 +40,6 @@ class Controls{
                     this.reverse=false;
                     break;
             }
-            // console.table(this);
         }
     }
 }

@@ -1,21 +1,23 @@
 class Car{
-    constructor(x, y, width, height){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    constructor(x,y,width,height){
+        this.x=x;
+        this.y=y;
+        this.width=width;
+        this.height=height;
 
         this.speed=0;
         this.acceleration=0.2;
-        this.maxspeed=3;
+        this.maxSpeed=3;
         this.friction=0.05;
         this.angle=0;
 
-        this.controls = new Controls();
+        this.sensor=new Sensor(this);
+        this.controls=new Controls();
     }
 
-    update(){
+    update(roadBorders){
         this.#move();
+        this.sensor.update(roadBorders);
     }
 
     #move(){
@@ -26,11 +28,11 @@ class Car{
             this.speed-=this.acceleration;
         }
 
-        if(this.speed > this.maxSpeed){
-            this.speed=this.maxspeed;
+        if(this.speed>this.maxSpeed){
+            this.speed=this.maxSpeed;
         }
-        if(this.speed < -this.maxspeed/2){
-            this.speed=-this.maxspeed/2;
+        if(this.speed<-this.maxSpeed/2){
+            this.speed=-this.maxSpeed/2;
         }
 
         if(this.speed>0){
@@ -44,20 +46,18 @@ class Car{
         }
 
         if(this.speed!=0){
-            const flip = this.speed > 0 ? 1 : -1;
-
-            if (this.controls.left) {
-                this.angle += 0.03*flip;
+            const flip=this.speed>0?1:-1;
+            if(this.controls.left){
+                this.angle+=0.03*flip;
             }
-            if (this.controls.right) {
-                this.angle -= 0.03*flip;
+            if(this.controls.right){
+                this.angle-=0.03*flip;
             }
         }
 
         this.x-=Math.sin(this.angle)*this.speed;
         this.y-=Math.cos(this.angle)*this.speed;
     }
-
 
     draw(ctx){
         ctx.save();
@@ -70,11 +70,11 @@ class Car{
             -this.height/2,
             this.width,
             this.height
-
         );
-        
         ctx.fill();
-        
+
         ctx.restore();
+
+        this.sensor.draw(ctx);
     }
 }
