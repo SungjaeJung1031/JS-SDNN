@@ -49,7 +49,7 @@ class Car{
 
     }
 
-    // colligion algorithm reference
+    // collision algorithm reference
     // https://box2d.org/documentation/md__d_1__git_hub_box2d_docs_collision.html
     #assessDamage(roadBorders,traffic){
         for(let i=0;i<roadBorders.length;i++){

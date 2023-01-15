@@ -49,3 +49,12 @@ function polysIntersect(poly1, poly2){
     }
     return false;
 }
+
+function getRGBA(value){
+    const alpha=Math.abs(value);
+    const R=value<0?0:255;
+    const B=value>0?0:255;
+    const G=B;
+    return "rgba("+R+","+G+","+B+","+alpha+")";
+}
+
